@@ -58,12 +58,14 @@ if (!class_exists('h2u_twitter_pull_cron')) {
 			if (is_array($tweets)) {
 				$tweets = array_reverse($tweets);	// latest first
 				foreach ($tweets as $tweet) {
+                    // we gonna use this a lot, so save it as local variable
+                    $tweet_text = $tweet['text'];
+                    
+                    // if nothing in the text, proceed to next tweet
+                    if (!isset($tweet_text) || trim($tweet_text) === '') continue;
+                    
 					$this->options['last_tweet_id'] = $tweet['id_str'];	// save last tweet id
 					$this->post_format = 'post-format-status';
-					$tweet_text = $tweet['text'];						// we gonna use this a lot, so save it as local variable
-                    
-                    // if nothing in the string, proceed to next tweet
-                    if (!isset($tweet_text) || trim($tweet_text) === '') continue;
 					
 					// combine hashtags with predefined tags
 					$all_tags = $this->options['post_tags'];
