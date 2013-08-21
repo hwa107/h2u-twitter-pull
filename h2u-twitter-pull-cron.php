@@ -33,7 +33,7 @@ if (!class_exists('h2u_twitter_pull_cron')) {
 			// options retrieved from database
 			$this->options = $options;
 			
-			$this->request_url = 'https://api.twitter.com/1/statuses/user_timeline.json?screen_name='.$this->options['screen_name'].'&include_entities=true&trim_user=true';
+			$this->request_url = 'https://api.twitter.com/1.1/statuses/user_timeline.json?screen_name='.$this->options['screen_name'].'&include_entities=true&trim_user=true';
 			// create twitter object
 			$this->connection = new TwitterOAuth($this->options['consumer_key'], $this->options['consumer_secret'], $this->options['access_token'], $this->options['access_token_secret']);
 			$this->connection->useragent = USER_AGENT;
