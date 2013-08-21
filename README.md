@@ -30,3 +30,7 @@ v1.0.1
 v1.0.2
 
 - Fix an issue where new post will be created even with empty tweet
+
+v1.1.0
+
+- Using Twitter API 1.1

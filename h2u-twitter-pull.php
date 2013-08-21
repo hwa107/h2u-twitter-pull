@@ -5,7 +5,7 @@ Plugin URI: http://hwa2u.com/
 Description: This plugin will check Twitter every 10 minutes for any new tweets, if there's then the plugin will pull them all and post them as normal WordPress blog post. Several options available such as define the category for the post as well as not to post twitter mentions.
 Author: hwa
 Author URI: http://hwa2u.com/
-Version: 1.0.2
+Version: 1.1.0
 
 For more information, please look at README.md.
 */
@@ -30,7 +30,7 @@ if (!class_exists('h2u_twitter_pull')) {
 
 		// constructor
 		function __construct() {
-			$this->version = '1.0.1';
+			$this->version = '1.1.0';
 			$this->plugin_name = plugin_basename(__FILE__);
 			$this->plugin_file_name = basename(__FILE__);
 			$this->plugin_file_url = admin_url('options-general.php?page='.$this->plugin_file_name);
