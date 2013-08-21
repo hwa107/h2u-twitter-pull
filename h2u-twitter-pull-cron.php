@@ -33,7 +33,7 @@ if (!class_exists('h2u_twitter_pull_cron')) {
 			// options retrieved from database
 			$this->options = $options;
 			
-			$this->request_url = 'https://api.twitter.com/1/statuses/user_timeline.json?screen_name='.$this->options['screen_name'].'&include_entities=true&trim_user=true';
+			$this->request_url = 'https://api.twitter.com/1.1/statuses/user_timeline.json?screen_name='.$this->options['screen_name'].'&include_entities=true&trim_user=true';
 			// create twitter object
 			$this->connection = new TwitterOAuth($this->options['consumer_key'], $this->options['consumer_secret'], $this->options['access_token'], $this->options['access_token_secret']);
 			$this->connection->useragent = USER_AGENT;
@@ -58,12 +58,18 @@ if (!class_exists('h2u_twitter_pull_cron')) {
 			if (is_array($tweets)) {
 				$tweets = array_reverse($tweets);	// latest first
 				foreach ($tweets as $tweet) {
-					$this->options['last_tweet_id'] = $tweet['id_str'];	// save last tweet id
-					$this->post_format = 'post-format-status';
-					$tweet_text = $tweet['text'];						// we gonna use this a lot, so save it as local variable
+                    // we gonna use this a lot, so save it as local variable
+                    $tweet_text = $tweet['text'];
                     
-                    // if nothing in the string, proceed to next tweet
-                    if (!isset($tweet_text) || trim($tweet_text) === '') continue;
+                    // if nothing in the text, proceed to next tweet
+                    if (!$this->has_value($tweet_text)) continue;
+                    
+                    // save last tweet id
+					$this->options['last_tweet_id'] = $tweet['id_str'];
+                    if (!$this->has_value($this->options['last_tweet_id'])) {
+                        $this->options['last_tweet_id'] = '';
+                    }
+					$this->post_format = 'post-format-status';
 					
 					// combine hashtags with predefined tags
 					$all_tags = $this->options['post_tags'];
