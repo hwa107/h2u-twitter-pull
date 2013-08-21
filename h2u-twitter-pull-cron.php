@@ -62,9 +62,13 @@ if (!class_exists('h2u_twitter_pull_cron')) {
                     $tweet_text = $tweet['text'];
                     
                     // if nothing in the text, proceed to next tweet
-                    if (!isset($tweet_text) || trim($tweet_text) === '') continue;
+                    if (!$this->has_value($tweet_text)) continue;
                     
-					$this->options['last_tweet_id'] = $tweet['id_str'];	// save last tweet id
+                    // save last tweet id
+					$this->options['last_tweet_id'] = $tweet['id_str'];
+                    if (!$this->has_value($this->options['last_tweet_id'])) {
+                        $this->options['last_tweet_id'] = '';
+                    }
 					$this->post_format = 'post-format-status';
 					
 					// combine hashtags with predefined tags
