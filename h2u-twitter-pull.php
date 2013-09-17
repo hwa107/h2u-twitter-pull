@@ -5,7 +5,7 @@ Plugin URI: http://hwa2u.com/
 Description: This plugin will check Twitter every 10 minutes for any new tweets, if there's then the plugin will pull them all and post them as normal WordPress blog post. Several options available such as define the category for the post as well as not to post twitter mentions.
 Author: hwa
 Author URI: http://hwa2u.com/
-Version: 1.1.0
+Version: 1.1.1
 
 For more information, please look at README.md.
 */
@@ -30,7 +30,7 @@ if (!class_exists('h2u_twitter_pull')) {
 
 		// constructor
 		function __construct() {
-			$this->version = '1.1.0';
+			$this->version = '1.1.1';
 			$this->plugin_name = plugin_basename(__FILE__);
 			$this->plugin_file_name = basename(__FILE__);
 			$this->plugin_file_url = admin_url('options-general.php?page='.$this->plugin_file_name);
@@ -442,7 +442,7 @@ if (!class_exists('h2u_twitter_pull')) {
 									<div class="option">
 										<label for="post_author">'.__('Post Author:', 'h2utp').'</label>
 										'.$this->create_select_options('<select name="post_author" id="post_author">', '</select>', $all_user_id, $all_user_name, $this->options['post_author']).'
-										<span>'.__('Local author for Tweeter posts.', 'h2utp').'</span>
+										<span>'.__('Local author for Twitter posts.', 'h2utp').'</span>
 									</div>
 									<div class="option">
 										<label for="post_title">'.__('Twitter Post Title:', 'h2utp').'</label>
@@ -454,12 +454,12 @@ if (!class_exists('h2u_twitter_pull')) {
 									<div class="option">
 										<label for="post_category">'.__('Post Category:', 'h2utp').'</label>
 										'.$catogory_checkbox.'
-										<span>'.__('Categories for Tweeter posts.', 'h2utp').'</span>
+										<span>'.__('Categories for Twitter posts.', 'h2utp').'</span>
 									</div>
 									<div class="option">
 										<label for="post_tags">'.__('Twitter Post Tags:', 'h2utp').'</label>
 										<textarea name="post_tags" id="post_tags" rows="5" cols="50">'.$post_tags.'</textarea>
-										<span>'.__('Tags for Tweeter posts. Separate each tag with newline.', 'h2utp').'</span>
+										<span>'.__('Tags for Twitter posts. Separate each tag with newline.', 'h2utp').'</span>
 									</div>
 									<div class="option">
 										<label for="str_to_filter">'.__('Words To Exclude From Post:', 'h2utp').'</label>
