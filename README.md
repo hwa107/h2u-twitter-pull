@@ -34,3 +34,7 @@ v1.0.2
 v1.1.0
 
 - Using Twitter API 1.1
+
+v1.1.1
+
+- Some minor typo correction
